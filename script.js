@@ -35,7 +35,8 @@ function operate(num1, num2, operator){
 }
 
 function numClicked(e){
-    console.log(e.target.value)
+    let num = e.target.value
+    display.innerHTML += num
 }
 
 
