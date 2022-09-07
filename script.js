@@ -34,3 +34,17 @@ function operate(num1, num2, operator){
     }
 }
 
+function numClicked(e){
+    console.log(e.target.value)
+}
+
+
+//get access to display element
+let display = document.querySelector('.display')
+
+//access the button numbers
+const numButtons = document.querySelectorAll('.num')
+
+numButtons.forEach( button => {
+    button.addEventListener('click', numClicked)
+})
