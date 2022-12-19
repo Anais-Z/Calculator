@@ -1,0 +1,51 @@
+button{
+    height: 75px;
+    width: 50px;
+    color: rgb(4, 247, 239);
+    background-color: rgb(5, 54, 254);
+    font-weight: bolder;
+    font-size:x-large;
+}
+
+.operator{
+    color: rgb(0, 255, 55);
+}
+
+.equal{
+    color: white
+}
+
+.clear{
+    color: red;
+}
+
+table{
+    border: 5px solid black;
+    background-color: rgb(4, 59, 241);
+}
+
+.numbers-display{
+    border: 5px solid black;
+    background-color: aliceblue;
+    height: 70px;
+    width: 218px
+}
+
+main{
+    margin: 0 auto;
+    margin-top: 250px;
+    margin-left: 700px;
+    
+}
+
+footer{
+    margin-left: 708px;
+}
+
+body{
+    background-color: aquamarine;
+}
+
+h3{
+    color: rgb(0, 38, 255);
+}
