@@ -1,3 +1,5 @@
+let operator = ""
+
 //create function for add, subtract, multiply and divide
 
 function add(num1, num2){
@@ -16,18 +18,20 @@ function divide(num1, num2){
     return num1 / num2;
 }
 
-//create array
-let values = [];
-
-//used to concatenate strings 
-let currentNumElement = '';
+let prevNum = ""
+let currentNum = ""
 
 let counter = false;
 
 //create new function that takes in 2 numbers and an operator
 //then calls one of the above functions
-function operate(num1, num2, operator){
+function operate(){
 
+    num1 = Number(currentNum)
+    num2 = Number(prevNum)
+
+    console.log("This is the first" + num1)
+    console.log("this is the 2nd " + num2)
     let result = 0;
 
     switch(operator){
@@ -49,96 +53,31 @@ function operate(num1, num2, operator){
         break;
     }
 
+    display.textContent = result
+    currentDisplay.textContent = " "
+    prevNum = result;
     return result;
 }
 
-//function for when a number button is clicked
 function numClicked(e){
-    if(counter == true){
-        display.textContent = '';
-        counter = false;
-    }
+    // make sure the number has less than 7 digits
     
-    let num = e.target.value;
-    display.textContent += num;
-    currentNumElement += num;
+    if(e.target.value <= 6)
+    {
+        prevNum += e.target.value
+    }    
+    display.textContent = prevNum
 }
 
-//function for when an operator button is clicked
-function operatorClicked(e){
-    let op  = e.target.value;
-
-    if(counter == true){
-        counter = false;
-        display.textContent += op;    
-    }else{
-        display.textContent += op;
-    }
-    addElementToArray(op)
-}
-
-
-//function will be used to store elements in the values array
-function addElementToArray(element){
-
-     //convert type number then add it to string
-    values.push(Number(currentNumElement));
-
-    //then initialize to empty string
-    currentNumElement = '';
-
-    //then push operand
-    values.push(element);
-
-    console.log(values);
-}
-
-
-
-function evaluate(){
-    //convert type number then add it to string
-    values.push(Number(currentNumElement));
-
-    //then initialize to empty string
-    currentNumElement = '';
-
-    let firstNum = 0;
-
-    console.log(values);
-
-    //keep evaluating until there is only 1 element in values array
-    while(values.length != 1){
-
-        //get the three first elements in the array values and store it into a new array
-        let arr = values.slice(0,3);
-
-        //then remove the first 3 elements from values array
-        values.splice(0, 3);
-
-        //check if the 1st and 3rd element are numbers 
-        if(typeof(arr[0]) == 'number' && typeof(arr[2]) == 'number'){
-
-            //check if the 2nd element is an operator
-            if(arr[1] == '+' || arr[1] == 'x' || arr[1] == '-' || arr[1] == '/' ){
-
-                //then call the operate function
-                firstNum = operate(arr[0], arr[2], arr[1]);
-
-                //add the fistNum to the front of values array
-                values.unshift(firstNum);
-
-            }
-
-        }
-
-    }
-
-    console.log(firstNum);
-    //return and display the result
-    display.textContent = firstNum;
-    values.splice(0, values.length)
-    counter = true;
-
+function operatorClicked(e)
+{
+    currentNum = prevNum
+    operator = e.target.value
+    console.log("this is the " + operator)
+    currentDisplay.textContent = prevNum + " " + operator 
+    display.textContent = " "
+    prevNum = " "
+    
 }
 
 //function for when the clear button is clicked
@@ -146,11 +85,12 @@ function clearClicked(){
    
     //reload the page
     location.reload();
-
 }
 
 //get access to display element
 let display = document.querySelector('.display');
+
+let currentDisplay = document.querySelector('.display-current')
 
 //access the button numbers
 const numButtons = document.querySelectorAll('.num');
@@ -159,16 +99,19 @@ numButtons.forEach( button => {
     button.addEventListener('click', numClicked);
 })
 
+
+
 //access equal button
 let equal = document.querySelector('.equal');
 
-equal.addEventListener('click', evaluate);
+equal.addEventListener('click', operate);
 
 //access the operator buttons and create event listener
 const operatorButtons = document.querySelectorAll('.operator');
 
-operatorButtons.forEach(button => {
-    button.addEventListener('click', operatorClicked);
+operatorButtons.forEach( button => {
+    button.addEventListener('click', operatorClicked )
+    
 })
 
 //get access to clear button
