@@ -62,7 +62,7 @@ function operate(){
 function numClicked(e){
     // make sure the number has less than 7 digits
     
-    if(e.target.value <= 6)
+    if(e.target.value.length <= 6)
     {
         prevNum += e.target.value
     }    
